@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-8 block pt-5 mt-3 d-flex justify-content-center align-items-start ">
+				<div class="d-flex justify-content-center flex-column w-80">
+					<h2 class="text-center ">Отбор по значениям объектов Car</h2>
+					<h5>Марка машины</h5>
+					<input type="text" name="brand" id="brand">
+					<h5>Цвет кузова</h5>
+					<input type="text" name="color" id="color">
+					<h5>Количество пассажиров</h5>
+					<input type="text" name="max_passengers" id="max_passengers">
+					<h5>Дата покупки</h5>
+					<input type="text" name="purchase" id="purchase">
+					<h5>Леворульная машина?</h5>
+					<input type="text" name="is_left_hand_drive" id="is_left_hand_drive">
+					<form method="post" class="mt-4 d-flex justify-content-center" action="http://localhost:8080/sql">
+						<input type="text" hidden="" name="constraints" id="constraints">
+						<input type="submit" onclick="updateConstraints()">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		let json = 0;
+
+		function updateConstraints() {
+			let brand = document.getElementById("brand").value;
+			let color = document.getElementById("color").value;
+			let max_passengers = document.getElementById("max_passengers").value;
+			let purchase = document.getElementById("purchase").value;
+			let is_left_hand_drive = document.getElementById("is_left_hand_drive").value;
+
+			json = {
+				"typeObject": "car",
+				"brand": brand,
+				"color": color,
+				"max_passengers": max_passengers,
+				"purchase": purchase,
+				"is_left_hand_drive": is_left_hand_drive
+			};
+			document.getElementById("constraints").value = JSON.stringify(json);
+		}
+		setInterval(updateConstraints, 100);
+	</script>
+</body>
+</html>
